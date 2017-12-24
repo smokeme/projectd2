@@ -1,0 +1,5 @@
+John Smith 5242 25 Manager 2000
+Joe Scott 4125 41 Staff 1500
+Mary Jones 3214 12 Coordinator 800
+Jane Dawson 1242 21 Staff 1400
+Andy Akins 5324 41 Staff 1200

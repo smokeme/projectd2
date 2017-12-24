@@ -1,0 +1,5 @@
+John Smith 25 Clevland OH 25 
+Joe Scott 41 Lansing MI 14 
+Mary Jones  12 Denver CO 75
+Jane Dawson 21 Lansing MI 57 
+Andy Akins 41 Denver CO 41 
