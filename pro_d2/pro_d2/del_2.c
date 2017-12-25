@@ -62,8 +62,8 @@ typedef struct EmployeeStatisticsTable
 int MainMenu ();
 void Load_Tables_file(EmployeeInformationTable * a,EmployeeAddressTable * b, EmployeeBenefitstable * c,EmployeeStatisticsTable * d, FILE * f1, FILE * f2, FILE * f3, FILE * f4 );
 void Load_Queries_file(char y[100][100], FILE * fq);
-void  Execute_and_Display_Screen();
-void Execute_and_Store_File();
+void Execute_and_Display_Screen(char y[100][100], FILE * fq);
+void Execute_and_Store_File(char y[100][100], FILE * fq);
 int main()
 {
 	int x;
@@ -292,7 +292,6 @@ void Load_Queries_file(char y[100][100], FILE * fq)
 void  Execute_and_Display_Screen(char y[100][100], FILE * fq)
 {
 	char *c;
-	
 	char line[256];
 	
 	int i=0;
@@ -300,11 +299,10 @@ void  Execute_and_Display_Screen(char y[100][100], FILE * fq)
 	{
 		
 
-		c = strtok(line, "  , ");
+	 c = strtok(line, "  , ");
          while(c !=NULL)
           {
-			string x = c;
-            printf("%s %s\n",c,x.Substring(0, 0));
+            printf("%s ",c);
 			strcpy(y[i],c);
             c = strtok (NULL, " , ");
 			i++;
@@ -315,7 +313,7 @@ void  Execute_and_Display_Screen(char y[100][100], FILE * fq)
 }
 
 
-void Execute_and_Store_File()
+void Execute_and_Store_File(char y[100][100], FILE * fq)
 {
 
 
