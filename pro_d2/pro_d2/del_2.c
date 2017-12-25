@@ -1,62 +1,62 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
-//project del2 
+//project del2
 //students names:         ID:
 //Lamees Almutairi        25728
 //Aeshah Alhamdan         25716
 
 typedef struct EmployeeInformationTable
 	{
-		
+
 		char FirstName[10];
 		char LastName[10];
 		int SSN ;
 		int ID;
 		char Position[15];
 		int Salary;
-		
-		
-		
+
+
+
 }EmployeeInformationTable;
 
 typedef struct EmployeeAddressTable
 	{
-		
-		
+
+
 		char FirstName[10];
 		char LastName[10];
 		int ID;
 		char City[10];
 		char State[5];
 		int Bldg;
-		
-		
-		
+
+
+
 }EmployeeAddressTable;
 
-typedef struct EmployeeBenefitstable 
+typedef struct EmployeeBenefitstable
 	{
-		
+
 		char FirstName[10];
 		char LastName[10];
 		int ID;
 		char Position[15];
 		int  Salary;
 		int Bounce;
-		
-		
-		
+
+
+
 }EmployeeBenefitstable;
 
-typedef struct EmployeeStatisticsTable  
-	{			
+typedef struct EmployeeStatisticsTable
+	{
 		int EmployeeIDNo;
 		char Position[15];
 		int Salary;
 		int Benefits;
-		
-		
+
+
 }EmployeeStatisticsTable;
 
 int MainMenu ();
@@ -78,7 +78,7 @@ int main()
 	FILE * f4=fopen("EmployeeStatisticsTable.txt","r");
 	FILE * fq;
 	x=MainMenu();
-	
+
 	while (x!=5){
 		switch(x){
 		case 1:
@@ -122,15 +122,15 @@ int main()
     free(b);
     free(c);
     free(d);
-    
+
 
 
 	system("pause");
 	return 0;
 }
- 
+
 int countlines(char *filename)
-{                                 
+{
   FILE *fp = fopen(filename,"r");
   int ch=0;
   int lines=0;
@@ -192,11 +192,11 @@ void Load_Tables_file(EmployeeInformationTable * a,EmployeeAddressTable * b, Emp
 	printf("\t%d   ",a[i].ID);
 	printf("\t%s   ",a[i].Position);
 	printf("\t%d  \n",a[i].Salary);
-	
-	
+
+
 }
-		
-	
+
+
 		while(fscanf(f2,"%s",b[L1].FirstName)!=EOF)
 	{
 	fscanf(f2,"%s",b[L1].LastName);
@@ -216,8 +216,8 @@ void Load_Tables_file(EmployeeInformationTable * a,EmployeeAddressTable * b, Emp
 	printf("\t%s    ",b[i].City);
 	printf("\t%s    ",b[i].State);
 	printf("\t%d    \n",b[i].Bldg);
-	
-	
+
+
 }
 
 	while(fscanf(f3,"%s",c[L3].FirstName)!=EOF)
@@ -227,8 +227,8 @@ void Load_Tables_file(EmployeeInformationTable * a,EmployeeAddressTable * b, Emp
 	fscanf(f3,"%d",&c[L3].Salary);
 	fscanf(f3,"%d",&c[L3].Bounce);
 	fscanf(f3,"%s",c[L3].Position);
-	
-	
+
+
 	L3++;
 	}
 	printf("\n\t\tEmployee Benefits table\t\t\n");
@@ -244,10 +244,10 @@ void Load_Tables_file(EmployeeInformationTable * a,EmployeeAddressTable * b, Emp
 	}
 
 
-	
+
 	while(fscanf(f4,"%d",&d[L4].EmployeeIDNo)!=EOF)
 	{
-	
+
 	fscanf(f4,"%d",&d[L4].Salary);
 	fscanf(f4,"%d",&d[L4].Benefits);
 	fscanf(f4,"%s",d[L4].Position);
@@ -262,18 +262,18 @@ void Load_Tables_file(EmployeeInformationTable * a,EmployeeAddressTable * b, Emp
 	printf("\t%s  \n",d[i].Position);
 	}
 }
-	
+
 void Load_Queries_file(char y[100][100], FILE * fq)
 {
 
-	
+
 	char *c;
 	char line[256];
-	
+
 	int i=0;
 	while(fgets(line ,sizeof(line),fq))
 	{
-		
+
 
 		c = strtok(line, "  , ");
          while(c !=NULL)
@@ -285,32 +285,76 @@ void Load_Queries_file(char y[100][100], FILE * fq)
 		 }
     printf("\n");
 	}
-	
+
 }
 
 
 void  Execute_and_Display_Screen(char y[100][100], FILE * fq)
 {
 	char *c;
+	char *newline;
 	char line[256];
-	
 	int i=0;
+	int index=0;
+	char findex[100];
+	char z[100][100][100];
+	int zindex = 0;
+	char select[] = "SELECT";
+	char from[] = "FROM";
+	char id[] = "ID";
+
 	while(fgets(line ,sizeof(line),fq))
 	{
-		
+		// printf("zindex: %d\n", zindex);
+		index=0;
+		c = strtok(line, "  , ");
 
-	 c = strtok(line, "  , ");
-         while(c !=NULL)
-          {
-            printf("%s ",c);
+		while(c !=NULL) {
+			// if(!strcmp(c,from)){
+			//
+			// 	// printf("ZINDEX SHIT: %s\nzindex is :%d \ni is: %d\n",z[zindex][i],zindex,i);
+			// 	newline = strtok(line, "  , ");
+			// 	// printf("NEWLINE: %s\n", newline);
+			// }
+			printf("%s ",c);
 			strcpy(y[i],c);
-            c = strtok (NULL, " , ");
+			strcpy(z[zindex][index],c);
+			// printf("zindex: %d\tindex: %d\n", zindex, index);
+			c = strtok (NULL, " , ");
 			i++;
-		 }
-    printf("\n");
-	}
+			index++;
+		}
+		printf("\n");
+		for (int thing = 1; thing < index; thing++) {
+			// if(z[zin][thing]){
+			// 	break;
+			// }
+			if(!strcmp(z[zindex][thing],from)){
+				strcpy(findex,z[zindex][thing+1]);
+				break;
+			}
+			printf("Z: %s\n", z[zindex][thing]);
 
+		}
+		printf("FROM FILE: %s\n", findex);
+		zindex++;
+
+		printf("\n\n\n");
+		printf("NEW LOOP\n");
+	}
+	// for (int zin = 0; zin <= zindex; zin++) {
+	// 	printf("zin: %d\n", zin);
+	// 	for (int thing = 1; thing < index; thing++) {
+	// 		printf("Z: %s\n", z[zin][thing]);
+	// 		// if(z[zin][thing]){
+	// 		// 	break;
+	// 		// }
+	// 	}
+	// 	printf("\n");
+	// }
+	// printf("Z: %s\n\n", z[1][3]);
 }
+
 
 
 void Execute_and_Store_File(char y[100][100], FILE * fq)
